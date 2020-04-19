@@ -5,18 +5,31 @@
 {% endblock %}
 
 {% block body %}
-<h1>All Posts</h1>
+<br>
+<div>
+    <h1 style="display:inline">All Posts</h1>
+    <a style="display:inline" class="btn btn-success float-right" href="/posts/new">+ New Post</a>
+</div>
+<hr>
 
-    {% for post in posts %}
-        <h2>By : {{ post.title }}</h2>
+{% for post in posts %}
+    <br>
+    <h2>{{ post.title }}</h2>
 
-        {% if post.author %}
-            <h3>{{ post.author }}</h3>
-        {% else %}
-            <h3>By : N/A</h3>
-        {% endif %}
-        <p>{{ post.content }}</p>
-    {% endfor %}
+    {% if post.author %}
+        <small> Writtern by {{ post.author }} on {{ post.date_posted }}</small>
+    {% else %}
+        <small> Writtern by Unknown on {{ post.date_posted }}</small>
+    {% endif %}
+    <br>
+    <br>
+
+    <p style="white-space: pre-wrap;">{{ post.content }}</p>
+    <a class="btn btn-danger" href="/posts/delete/{{post.id}}">Delete</a>
+    <a class="btn btn-primary" href="/posts/edit/{{post.id}}">Edit</a>
+    <br>
+    <hr>
+{% endfor %}
 
 
 {% endblock %}
